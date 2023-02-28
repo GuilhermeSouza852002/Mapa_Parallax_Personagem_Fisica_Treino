@@ -17,6 +17,7 @@ class Level:
          self.tiles = pygame.sprite.Group()     #grupo para as plataformas X
          self.player = pygame.sprite.GroupSingle()    #grupo para os players P
          
+         #descobrindo a posição x e y dos ladrilhos
          for row_index,row in enumerate(layout):
              for col_index,cell in enumerate(row):
                  x = col_index * tile_size

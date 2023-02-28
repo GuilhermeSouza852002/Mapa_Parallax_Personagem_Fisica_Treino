@@ -11,6 +11,6 @@ level_map = [
 'XX     P            XXXXX              ',
 'XXXX  XXXXXXXXXXXXXX                   ',]
 
-tile_size = 64
-screen_width = 1200
+tile_size = 64 #largura do ladrilho
+screen_width = 1200 #altura mapa
 screen_height = len(level_map) * tile_size # a largura do mapa e aumentada de acordo com o mapa
