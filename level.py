@@ -65,9 +65,13 @@ class Level:
                 if player.direction.y > 0:
                     player.rect.bottom = sprite.rect.top
                     player.direction.y = 0
+                    player.on_floor = True
                 elif player.direction.y < 0:
                     player.rect.top = sprite.rect.bottom
                     player.direction.y = 0
+                
+            if player.on_floor and player.direction.y != 0:
+                player.on_floor =  False
                     
     def run(self):
         #desenhar o level
