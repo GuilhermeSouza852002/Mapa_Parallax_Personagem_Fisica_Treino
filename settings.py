@@ -4,12 +4,12 @@ level_map = [
 '                                       ',
 '                                       ',
 '                                       ',
-'XX        XXXXXXXXXXXXXXXXX   XX       ',
-'XX      X                       X X X X',
-'XXX       X  X  X     XXX        X X X ',
-'XXXX             XX        XXXXX       ',
-'XX     P            XXXXX              ',
-'XXXX  XXXXXXXXXXXXXX                   ',]
+'XX       XXXXXXXXXXXXXXXXX    XXXXXXX  ',
+'XX   X X X                   X XX X X X',
+'XXX                   X    X     X X X ',
+'XXXP      X  X  X     XXX        X X X ',
+'XXXX             X         XXXXX       ',
+'XXXXXXXXXXXXXXXXXXXX                   ',]
 
 tile_size = 64 #largura do ladrilho
 screen_width = 1200 #altura mapa
