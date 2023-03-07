@@ -4,8 +4,8 @@ import pygame
 class Player(pygame.sprite.Sprite):
     def __init__(self,pos):
         super().__init__()
-        self.image = pygame.Surface((32,64))
-        self.image.fill('red')
+        self.image = pygame.Surface((32,64))    #tamanho player
+        self.image.fill('#0bf246')  #cor player
         self.rect = self.image.get_rect(topleft = pos)
         
         #movimentação do player
@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.direction.x = 0
             
-        if keys[pygame.K_SPACE] and self.on_floor:
+        if keys[pygame.K_SPACE] and self.on_floor:  #pulo, limitação de pulo
             self.jump()
             
     def apply_gravity(self):
