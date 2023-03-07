@@ -21,7 +21,7 @@ while True:
             sys.exit()
     
     screen.blit(background_image, (0, 0))   #plotando fundo do mapa
-    screen.fill('#c5efe0') #definição da cor de fundo
+    #screen.fill('#c5efe0') #definição da cor de fundo
     level.run()
 
     pygame.display.update()

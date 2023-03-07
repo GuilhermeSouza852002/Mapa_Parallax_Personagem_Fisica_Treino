@@ -5,7 +5,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self,pos):
         super().__init__()
         self.image = pygame.Surface((32,64))    #tamanho player
-        self.image.fill('#0bf246')  #cor player
+        self.image.fill('#000000')  #cor player
         self.rect = self.image.get_rect(topleft = pos)
         
         #movimentação do player

@@ -1,10 +1,10 @@
 # Plataformas do mapa ou estrutura
 
 level_map = [
-'                                       ',
-'                                       ',
-'                                       ',
-'XX       XXXXXXXXXXXXXXXXX    XXXXXXX  ',
+'      X                                ',
+'     X                                 ',
+'    X                                  ',
+'XX X     XXXXXXXXXXXXXXXXX    XXXXXXX  ',
 'XX   X X X                   X XX X X X',
 'XXX                   X    X     X X X ',
 'XXXP         X  X     XX        X X X ',

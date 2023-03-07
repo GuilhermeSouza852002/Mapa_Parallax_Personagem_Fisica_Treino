@@ -1,6 +1,6 @@
 import pygame
 from tiles import Tile
-from settings import tile_size, screen_width
+from settings import tile_size, screen_width, screen_height
 from player import Player
 
 class Level:
@@ -29,22 +29,24 @@ class Level:
                  if cell == 'P':
                      player_sprite = Player((x,y)) 
                      self.player.add(player_sprite)
-        
+    
+    #movimento da camera
+    #pegando a posição x do player    
     def scroll_x(self):
         player = self.player.sprite
         player_x = player.rect.centerx
         direction_x = player.direction.x
         
-        if player_x < screen_width / 4 and direction_x < 0:
+        if player_x < screen_width / 4 and direction_x < 0: #camera movendose para esquerda
             self.world_shift = 8
             player.speed = 0
-        elif player_x > screen_width - (screen_width / 4) and direction_x > 0:
+        elif player_x > screen_width - (screen_width / 4) and direction_x > 0: #camera movendose para direita
             self.world_shift = -8
             player.speed = 0
         else:
             self.world_shift = 0
             player.speed = 8
-        
+            
     def horizontal_movement_collision(self):
         player = self.player.sprite
         player.rect.x += player.direction.x * player.speed
