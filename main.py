@@ -5,7 +5,7 @@ from level import Level
 # Setup do pygame
 #iniciação do jogo
 pygame.init()
-screen = pygame.display.set_mode((screen_width,screen_height)) 
+screen = pygame.display.set_mode((screen_width,screen_height)) #Definindo a janela de exibição
 pygame.display.set_caption('SuperMario100%Pirata') #nome do display
 clock = pygame.time.Clock()
 

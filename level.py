@@ -23,10 +23,10 @@ class Level:
                  x = col_index * tile_size
                  y = row_index * tile_size
                  
-                 if cell == 'X':
+                 if cell == 'X':        #Defiindo a posição do chão
                     tile = Tile((x,y),tile_size) 
                     self.tiles.add(tile)
-                 if cell == 'P':
+                 if cell == 'P':        #definindo a posição inicial do player
                      player_sprite = Player((x,y)) 
                      self.player.add(player_sprite)
     

@@ -11,8 +11,8 @@ class Player(pygame.sprite.Sprite):
         #movimentação do player
         self.direction = pygame.math.Vector2(0,0)
         self.speed = 5                           #velocidade player
-        self.gravity = 0.8
-        self.jump_speed = -16
+        self.gravity = 0.8                       #gravidade
+        self.jump_speed = -16                    #velocidade do pulo
         self.on_floor = False
         
     def get_input(self):
