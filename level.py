@@ -1,89 +1,80 @@
 import pygame
+from settings import *
 from tiles import Tile
-from settings import tile_size, screen_width, screen_height
 from player import Player
 
 class Level:
-    def __init__(self,level_data,surface):
-        # level setup
-        self.display_surface = surface
-        self.setup_level(level_data)
+    def __init__(self):
         
-        self.world_shift = 0
-     #O conjunto de X ganha forma no mapa
+        # level setup
+        self.display_surface = pygame.display.get_surface()
+        
+        # sprite group setup
+        self.visible_sprites = CameraGroup()
+        self.active_sprites = pygame.sprite.Group()
+        self.collision_sprites = pygame.sprite.Group()
+        
+        self.setup_level()
      
     #percorre as linhas do mapa e as númera 
-    def setup_level(self,layout):   
-         self.tiles = pygame.sprite.Group()     #grupo para as plataformas X
-         self.player = pygame.sprite.GroupSingle()    #grupo para os players P
-         
+    def setup_level(self):   
          #descobrindo a posição x e y dos ladrilhos
-         for row_index,row in enumerate(layout):
+         for row_index,row in enumerate(level_map):
              for col_index,cell in enumerate(row):
                  x = col_index * tile_size
                  y = row_index * tile_size
                  
                  if cell == 'X':        #Defiindo a posição do chão
-                    tile = Tile((x,y),tile_size) 
-                    self.tiles.add(tile)
+                    Tile((x,y),[self.visible_sprites,self.collision_sprites])
                  if cell == 'P':        #definindo a posição inicial do player
-                     player_sprite = Player((x,y)) 
-                     self.player.add(player_sprite)
-    
-    #movimento da camera
-    #pegando a posição x do player    
-    def scroll_x(self):
-        player = self.player.sprite
-        player_x = player.rect.centerx
-        direction_x = player.direction.x
-        
-        if player_x < screen_width / 4 and direction_x < 0: #camera movendose para esquerda
-            self.world_shift = 8
-            player.speed = 0
-        elif player_x > screen_width - (screen_width / 4) and direction_x > 0: #camera movendose para direita
-            self.world_shift = -8
-            player.speed = 0
-        else:
-            self.world_shift = 0
-            player.speed = 8
-            
-    def horizontal_movement_collision(self):
-        player = self.player.sprite
-        player.rect.x += player.direction.x * player.speed
-        
-        for sprite in self.tiles.sprites():
-            if sprite.rect.colliderect(player.rect):
-                if player.direction.x < 0:
-                    player.rect.left = sprite.rect.right
-                elif player.direction.x > 0:
-                    player.rect.right = sprite.rect.left
-    
-    def vertical_movement_collidion(self):
-        player = self.player.sprite
-        player.apply_gravity()
-        
-        for sprite in self.tiles.sprites():
-            if sprite.rect.colliderect(player.rect):
-                if player.direction.y > 0:
-                    player.rect.bottom = sprite.rect.top
-                    player.direction.y = 0
-                    player.on_floor = True
-                elif player.direction.y < 0:
-                    player.rect.top = sprite.rect.bottom
-                    player.direction.y = 0
-                
-            if player.on_floor and player.direction.y != 0:
-                player.on_floor =  False
+                    self.player = Player((x,y),[self.visible_sprites,self.active_sprites],self.collision_sprites)
+
                     
     def run(self):
         #desenhar o level
-        self.tiles.update(self.world_shift)
-        self.tiles.draw(self.display_surface)
-        self.scroll_x()
-        
-        #desenhar o player
-        self.player.update()
-        self.horizontal_movement_collision()
-        self.vertical_movement_collidion()
-        self.player.draw(self.display_surface)
-        
+        # run the entire game (level)
+        self.active_sprites.update()
+        self.visible_sprites.custom_draw(self.player)
+
+class CameraGroup(pygame.sprite.Group):
+	def __init__(self):
+		super().__init__()
+		self.display_surface = pygame.display.get_surface()
+		self.offset = pygame.math.Vector2(100,300)
+
+		# center camera setup 
+		# self.half_w = self.display_surface.get_size()[0] // 2
+		# self.half_h = self.display_surface.get_size()[1] // 2
+
+		# camera
+		cam_left = CAMERA_BORDERS['left']
+		cam_top = CAMERA_BORDERS['top']
+		cam_width = self.display_surface.get_size()[0] - (cam_left + CAMERA_BORDERS['right'])
+		cam_height = self.display_surface.get_size()[1] - (cam_top + CAMERA_BORDERS['bottom'])
+
+		self.camera_rect = pygame.Rect(cam_left,cam_top,cam_width,cam_height)
+
+	def custom_draw(self,player):
+
+		# get the player offset 
+		# self.offset.x = player.rect.centerx - self.half_w
+		# self.offset.y = player.rect.centery - self.half_h
+
+		# getting the camera position
+		if player.rect.left < self.camera_rect.left:
+			self.camera_rect.left = player.rect.left
+		if player.rect.right > self.camera_rect.right:
+			self.camera_rect.right = player.rect.right
+		if player.rect.top < self.camera_rect.top:
+			self.camera_rect.top = player.rect.top
+		if player.rect.bottom > self.camera_rect.bottom:
+			self.camera_rect.bottom = player.rect.bottom
+
+		# camera offset 
+		self.offset = pygame.math.Vector2(
+			self.camera_rect.left - CAMERA_BORDERS['left'],
+			self.camera_rect.top - CAMERA_BORDERS['top'])
+
+		for sprite in self.sprites():
+			offset_pos = sprite.rect.topleft - self.offset
+			self.display_surface.blit(sprite.image,offset_pos)

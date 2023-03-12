@@ -1,5 +1,5 @@
 # Plataformas do mapa ou estrutura
-
+# Mapas
 level_map = [
 '      X                                ',
 '     X                                 ',
@@ -17,6 +17,15 @@ level_map = [
 'XXXXXXXXXXXXXXXXXXXX                   ',]
 
 tile_size = 64 #largura do ladrilho
-screen_width = 1200 #altura mapa
-screen_height = 600
-#screen_height = len(level_map) * tile_size # a largura do mapa e aumentada de acordo com o mapa
+
+#configurações da tela
+screen_height = 720
+screen_width = len(level_map) * tile_size # a largura do mapa e aumentada de acordo com o mapa
+
+#bordas da camera
+CAMERA_BORDERS = {
+    'left': 100,
+    'right': 200,
+	'top':100,
+	'bottom': 150
+}

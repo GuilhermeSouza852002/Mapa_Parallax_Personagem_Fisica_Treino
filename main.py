@@ -11,8 +11,7 @@ clock = pygame.time.Clock()
 
 #sprite_sheet_image = pygame.image.load('personagem/Morcego32x32.png').convert_alpha()
 background_image = pygame.image.load('mapa\map.jpg')    #mapa fundo
-
-level = Level(level_map,screen) #metodo do level
+level = Level() 
 
 while True:
     for event in pygame.event.get():
