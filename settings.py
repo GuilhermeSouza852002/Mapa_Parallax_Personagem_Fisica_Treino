@@ -24,8 +24,8 @@ screen_width = len(level_map) * tile_size # a largura do mapa e aumentada de aco
 
 #bordas da camera
 CAMERA_BORDERS = {
-    'left': 100,
-    'right': 200,
-	'top':100,
-	'bottom': 150
+    'left': 400,
+    'right': 400,
+	'top':400,
+	'bottom': 400
 }
