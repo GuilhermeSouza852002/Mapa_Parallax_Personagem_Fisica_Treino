@@ -1,4 +1,5 @@
 import pygame
+from settings import *
 
 #Corpo do player
 class Player(pygame.sprite.Sprite):
@@ -58,8 +59,9 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.get_input()
         self.rect.x += self.direction.x * self.speed
-        self.vertical_movement_collidion()
-        self.apply_gravity()
         self.horizontal_movement_collision()
+        self.apply_gravity()
+        self.vertical_movement_collidion()
+        
         
         
