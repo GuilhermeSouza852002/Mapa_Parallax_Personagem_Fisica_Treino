@@ -45,11 +45,11 @@ class CameraGroup(pygame.sprite.Group):	#herdando sprite.Group
 
 		# camera
   		# devemos pegar a posição e o tamanho do retângulo
-		cam_left = CAMERA_BORDERS['left']	#cria uma borda do tamanho que foi definido o left
-		cam_top = CAMERA_BORDERS['top']		#cria uma borda do tamanho que foi definido o top
+		cam_left = camera_borders['left']	#cria uma borda do tamanho que foi definido o left
+		cam_top = camera_borders['top']		#cria uma borda do tamanho que foi definido o top
 		#descobrindo a altura e a lagurar do retângulo
-		cam_width = self.display_surface.get_size()[0] - (cam_left + CAMERA_BORDERS['right'])	#subtrai a largura total da tela left e right pra gerar a borda da tela da nova largura
-		cam_height = self.display_surface.get_size()[1] - (cam_top + CAMERA_BORDERS['bottom'])	#subtrai a autura total da tela top e bottom pra gerar a borda da tela da nova autura
+		cam_width = self.display_surface.get_size()[0] - (cam_left + camera_borders['right'])	#subtrai a largura total da tela left e right pra gerar a borda da tela da nova largura
+		cam_height = self.display_surface.get_size()[1] - (cam_top + camera_borders['bottom'])	#subtrai a autura total da tela top e bottom pra gerar a borda da tela da nova autura
 
 		self.camera_rect = pygame.Rect(cam_left,cam_top,cam_width,cam_height) #pegando a camera que sera movida pelo jogador
 
@@ -68,8 +68,8 @@ class CameraGroup(pygame.sprite.Group):	#herdando sprite.Group
 		# deslocamento da camera
 		self.offset = pygame.math.Vector2(
       	# pegando a posição superior esquerda da tela para que o jogador sempre esteja no centro da tela	
-			self.camera_rect.left - CAMERA_BORDERS['left'],
-			self.camera_rect.top - CAMERA_BORDERS['top'])
+			self.camera_rect.left - camera_borders['left'],
+			self.camera_rect.top - camera_borders['top'])
 
 		for sprite in self.sprites():	#replicando todos os elementos na tela
 			offset_pos = sprite.rect.topleft - self.offset #posição de deslocamento automatico
