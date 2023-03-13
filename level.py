@@ -7,27 +7,27 @@ class Level:
     def __init__(self):
         
         # level setup
-        self.display_surface = pygame.display.get_surface()
+        self.display_surface = pygame.display.get_surface() #obtendo a superficie
         
         # sprite group setup
-        self.visible_sprites = CameraGroup()
-        self.active_sprites = pygame.sprite.Group()
-        self.collision_sprites = pygame.sprite.Group()
+        self.visible_sprites = CameraGroup() #grupo que desenha o jogo na tela
+        self.active_sprites = pygame.sprite.Group() #grupo que atualiza as sprites
+        self.collision_sprites = pygame.sprite.Group() #grupo das sprites que colidem 
         
         self.setup_level()
      
     #percorre as linhas do mapa e as númera 
     def setup_level(self):   
          #descobrindo a posição x e y dos ladrilhos
-         for row_index,row in enumerate(level_map):
-             for col_index,cell in enumerate(row):
-                 x = col_index * tile_size
-                 y = row_index * tile_size
+         for row_index,row in enumerate(level_map):	#lendo linha por linha do level_map horizontal
+             for col_index,cell in enumerate(row):	#lendo colunas na vertical
+                 x = col_index * tile_size #obtendo a posição de x
+                 y = row_index * tile_size #obtendo a posição de y
                  
-                 if cell == 'X':        #Defiindo a posição do chão
-                    Tile((x,y),[self.visible_sprites,self.collision_sprites])
-                 if cell == 'P':        #definindo a posição inicial do player
-                    self.player = Player((x,y),[self.visible_sprites,self.active_sprites],self.collision_sprites)
+                 if cell == 'X':        #se a celula/coluna for igual a X ela recebe X que é a estrutura do mapa
+                    Tile((x,y),[self.visible_sprites,self.collision_sprites])	#colocando a estrutura do mapa na posição
+                 if cell == 'P':        #se a celula/coluna for igual a P ela recebe P que é o player
+                    self.player = Player((x,y),[self.visible_sprites,self.active_sprites],self.collision_sprites) #colocando jogador na posição
 
                     
     def run(self):
